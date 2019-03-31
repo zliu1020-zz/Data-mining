@@ -11,7 +11,6 @@ from sklearn.tree import export_graphviz
 from sklearn.externals.six import StringIO
 
 balance_data = pd.read_csv(r"/Users/Ziyan/Desktop/ECE 356/Lab/Lab4/query_result.csv")
-
 X = balance_data.values[:, 1:-1]
 Y = balance_data.values[:,-1]
 
@@ -29,17 +28,21 @@ yearID = enc.fit_transform(yearID).toarray()
 numerical_value = X[:, 1:]
 numerical_value = np.append(numerical_value, yearID, axis=1)
 numerical_value[np.isnan(numerical_value.tolist())] = 0
-
+# features = ['G','AB','R','H','2b','3B',	'HR','RBI',	'SB',
+#             'CS','BB','SO','IBB','HBP','SH','SF','GIDP','W','L',
+#             'G2','GS','CG','SHO','SV','IPouts','H2','ER',
+#             'HR2','BB2','SO2','BAOpp','ERA','IBB2',	'WP',
+#             'HBP2','BK','BFP','GF','R2','SH2','SF2','GIDP2']
 def generate_graph(tree, idx, criterion):
     dot = StringIO()
     export_graphviz(tree,
                     out_file=dot,
-                    feature_names=feature,
                     class_names=['Nominated', 'Elected'],
                     filled=True,
+                    #feature_names=features,
                     rounded=True,
                     special_characters=True)
-    tree_snapshot = pydot.graph_from_dot_data(dot_data.getvalue())
+    tree_snapshot = pydot.graph_from_dot_data(dot.getvalue())
     tree_snapshot[0].write_png(str(idx) + "_" + criterion + "_snapshot.png")
 
 for i in range(5):
