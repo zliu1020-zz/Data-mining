@@ -15,22 +15,22 @@ balance_data = pd.read_csv(r"/Users/Ziyan/Desktop/ECE 356/Lab/Lab4/query_result.
 X = balance_data.values[:, 1:-1]
 # access the indicated column
 Y = balance_data.values[:,-1]
-
-# yearID = X[:, 0]
+X[np.isnan(X.tolist())] = 0
+yearID = X[:, 0]
 
 Y = Y.reshape(-1,1)
 Y = Y.tolist()
 
-# yearID = yearID.reshape(-1,1)
-#
-# enc = OneHotEncoder(handle_unknown='ignore')
-#
-# yearID = enc.fit_transform(yearID).toarray()
+yearID = yearID.reshape(-1,1)
 
+enc = OneHotEncoder(handle_unknown='ignore')
+
+yearID = enc.fit_transform(yearID).toarray()
+print(yearID.shape)
 # numerical_value = X[:, 1:]
 # numerical_value = np.append(numerical_value, yearID, axis=1)
 # numerical_value[np.isnan(numerical_value.tolist())] = 0
-X[np.isnan(X.tolist())] = 0
+
 # features = ['G','AB','R','H','2b','3B',	'HR','RBI',	'SB',
 #             'CS','BB','SO','IBB','HBP','SH','SF','GIDP','W','L',
 #             'G2','GS','CG','SHO','SV','IPouts','H2','ER',

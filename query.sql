@@ -1,4 +1,4 @@
-select HallOfFame.playerID, HallOfFame.yearID, 
+select HallOfFame.playerID, 
 (select sum(Batting.G) from Batting where HallOfFame.playerID = Batting.playerID and HallOfFame.yearID >= Batting.yearID) as G,
 (select sum(Batting.AB) from Batting where HallOfFame.playerID = Batting.playerID and HallOfFame.yearID >= Batting.yearID) as AB,
 (select sum(Batting.R) from Batting where HallOfFame.playerID = Batting.playerID and HallOfFame.yearID >= Batting.yearID) as R,
