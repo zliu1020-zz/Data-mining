@@ -16,33 +16,23 @@ X = balance_data.values[:, 1:-1]
 # access the indicated column
 Y = balance_data.values[:,-1]
 X[np.isnan(X.tolist())] = 0
-yearID = X[:, 0]
 
 Y = Y.reshape(-1,1)
 Y = Y.tolist()
 
-yearID = yearID.reshape(-1,1)
+features = ['G','AB','R','H','2b','3B',	'HR','RBI',	'SB',
+            'CS','BB','SO','IBB','HBP','SH','SF','GIDP','W','L',
+            'G2','GS','CG','SHO','SV','IPouts','H2','ER',
+            'HR2','BB2','SO2','BAOpp','ERA','IBB2',	'WP',
+            'HBP2','BK','BFP','GF','R2','SH2','SF2','GIDP2']
 
-enc = OneHotEncoder(handle_unknown='ignore')
-
-yearID = enc.fit_transform(yearID).toarray()
-print(yearID.shape)
-# numerical_value = X[:, 1:]
-# numerical_value = np.append(numerical_value, yearID, axis=1)
-# numerical_value[np.isnan(numerical_value.tolist())] = 0
-
-# features = ['G','AB','R','H','2b','3B',	'HR','RBI',	'SB',
-#             'CS','BB','SO','IBB','HBP','SH','SF','GIDP','W','L',
-#             'G2','GS','CG','SHO','SV','IPouts','H2','ER',
-#             'HR2','BB2','SO2','BAOpp','ERA','IBB2',	'WP',
-#             'HBP2','BK','BFP','GF','R2','SH2','SF2','GIDP2']
 def generate_graph(tree, idx, criterion):
     dot = StringIO()
     export_graphviz(tree,
                     out_file=dot,
                     class_names=['Nominated', 'Elected'],
                     filled=True,
-                    #feature_names=features,
+                    feature_names=features,
                     rounded=True,
                     special_characters=True)
     tree_snapshot = pydot.graph_from_dot_data(dot.getvalue())
@@ -51,7 +41,6 @@ def generate_graph(tree, idx, criterion):
 for i in range(5):
     print("--------------------------------------------------")
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-    # X_train, X_test, y_train, y_test = train_test_split(numerical_value, Y, test_size = 0.2)
 
     clf_gini = DecisionTreeClassifier(criterion = "gini")
     clf_gini.fit(X_train, y_train)
