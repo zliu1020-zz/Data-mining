@@ -38,6 +38,12 @@ def generate_graph(tree, idx, criterion):
     tree_snapshot = pydot.graph_from_dot_data(dot.getvalue())
     tree_snapshot[0].write_png(str(idx) + "_" + criterion + "_snapshot.png")
 
+def print_results(criterion, y_test, y_pred):
+    print (criterion +  " accuracy is " + str(accuracy_score(y_test,y_pred)*100) + "%")
+    print("Confusion matrix = ")
+    print(confusion_matrix(y_test, y_pred))
+
+
 for i in range(5):
     print("--------------------------------------------------")
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
@@ -47,16 +53,11 @@ for i in range(5):
     generate_graph(clf_gini, i, "gini")
 
     y_pred_gini = clf_gini.predict(X_test)
-    print ("Gini Accuracy is ", accuracy_score(y_test,y_pred_gini)*100)
-
-    print("Confusion matrix = ")
-    print(confusion_matrix(y_test, y_pred_gini))
+    print_results("Gini", y_test, y_pred_gini)
 
     clf_entropy = DecisionTreeClassifier(criterion = "entropy")
     clf_entropy.fit(X_train, y_train)
     generate_graph(clf_entropy, i, "entropy")
 
     y_pred_entropy = clf_entropy.predict(X_test)
-    print ("Entropy Accuracy is ", accuracy_score(y_test,y_pred_entropy)*100)
-    print("Confusion matrix = ")
-    print(confusion_matrix(y_test, y_pred_entropy))
+    print_results("Entropy", y_test, y_pred_entropy)
