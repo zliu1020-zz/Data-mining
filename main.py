@@ -32,7 +32,7 @@ def generate_graph(tree, idx, criterion):
                     out_file=dot,
                     class_names=['Nominated', 'Elected'],
                     filled=True,
-                   # feature_names=features,
+                    feature_names=features,
                     rounded=True,
                     special_characters=True)
     tree_snapshot = pydot.graph_from_dot_data(dot.getvalue())
