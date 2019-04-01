@@ -1,4 +1,4 @@
-select HallOfFame.playerID, 
+select HallOfFame.playerID, HallOfFame.ballots, HallOfFame.needed, 
 (select avg(Batting.G) from Batting where HallOfFame.playerID = Batting.playerID and HallOfFame.yearID >= Batting.yearID) as G,
 (select avg(Batting.AB) from Batting where HallOfFame.playerID = Batting.playerID and HallOfFame.yearID >= Batting.yearID) as AB,
 (select avg(Batting.R) from Batting where HallOfFame.playerID = Batting.playerID and HallOfFame.yearID >= Batting.yearID) as R,
