@@ -6,11 +6,13 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import log_loss
+from sklearn.metrics import f1_score
+from sklearn.metrics import classification_report
 import pydot
 from sklearn.tree import export_graphviz
 from sklearn.externals.six import StringIO
 
-balance_data = pd.read_csv(r"/Users/Ziyan/Desktop/ECE 356/Lab/Lab4/query_result.csv")
+balance_data = pd.read_csv(r"./query_result.csv")
 # get rid of playerID
 X = balance_data.values[:, 1:-1]
 # access the indicated column
@@ -20,7 +22,7 @@ X[np.isnan(X.tolist())] = 0
 Y = Y.reshape(-1,1)
 Y = Y.tolist()
 
-features = ['G','AB','R','H','2b','3B',	'HR','RBI',	'SB',
+features = ['ballots','needed','G','AB','R','H','2b','3B',	'HR','RBI',	'SB',
             'CS','BB','SO','IBB','HBP','SH','SF','GIDP','W','L',
             'G2','GS','CG','SHO','SV','IPouts','H2','ER',
             'HR2','BB2','SO2','BAOpp','ERA','IBB2',	'WP',
@@ -47,10 +49,11 @@ def print_results(criterion, y_test, y_pred):
     print (criterion +  " accuracy is " + str(get_accuracy(y_test, y_pred)) + "%")
     print("Confusion matrix = ")
     print(confusion_matrix(y_test, y_pred))
+    print("Classification report: ")
+    print(classification_report(y_test, y_pred, target_names=['Nominated', 'Elected']))
 
 
 def generate_csv(file_name, arr):
-    #arr = np.column_stack((col1, col2))
     np.savetxt(file_name, arr, delimiter=',', fmt='%s')
 
 gini_accuracy_dataset = ['Dataset']
@@ -70,6 +73,7 @@ entropy_predictions = ['Predictions']
 for i in range(5):
     print("--------------------------------------------------")
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+
 
     ###### GINI
     clf_gini = DecisionTreeClassifier(criterion = "gini")
