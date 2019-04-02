@@ -21,15 +21,13 @@
 
 ### Installing Manually
 
-1. Make sure Python3 is installed by typing `mysql --version` in your terminal. 
+1. Install `numpy` by typing `pip install numpy`. Refer to this [guide](https://docs.scipy.org/doc/numpy/user/install.html/) if the above command fails.
 
-2. Install `numpy` by typing `pip install numpy`. Refer to this [guide](https://docs.scipy.org/doc/numpy/user/install.html/) if the above command fails.
+2. Install `pandas` by typing `pip install tabulate`. Refer to this [guide](https://pandas.pydata.org/pandas-docs/stable/install.html) if the above command fails.
 
-3. Install `pandas` by typing `pip install tabulate`. Refer to this [guide](https://pandas.pydata.org/pandas-docs/stable/install.html) if the above command fails.
+3. Install `pydot` by typing `pip install pydot`. Refer to this [guide](https://pypi.org/project/pydot/) if the above command fails.
 
-4. Install `pydot` by typing `pip install pydot`. Refer to this [guide](https://pypi.org/project/pydot/) if the above command fails.
-
-5. Install `scikit_learn` by typing `pip install scikit_learn`. Refer to this [guide](https://calebshortt.com/2016/01/15/installing-scikit-learn-python-data-mining-library/) if the above command fails.
+4. Install `scikit_learn` by typing `pip install scikit_learn`. Refer to this [guide](https://calebshortt.com/2016/01/15/installing-scikit-learn-python-data-mining-library/) if the above command fails.
 
 ## Run
 Launch the application by using the following command:
