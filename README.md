@@ -1,11 +1,12 @@
-## Prerequisites
+## Getting Started
+### Prerequisites
 - `Python3`
 - `numpy v1.16.2`
 - `pandas v0.24.2`
 - `pydot v1.4.1`
 - `scikit_learn v0.20.3`
 
-## Check default Python version
+### Check default Python version
 - Install `Python3` by following this [article](https://realpython.com/installing-python/).
 - Check if your system has installed Python3 and what version it is by typing ``python --version ``
 - If the default version is at least v3, use `python` and `pip` in the following guidelines
